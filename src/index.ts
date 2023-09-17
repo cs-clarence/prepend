@@ -15,13 +15,25 @@ command
   .option("-v, --verbose", "Verbose output")
   .option("-e, --ext <extensions...>", "Only prepend to these file extensions")
   .action(async (opts) => {
+    if (opts.verbose) {
+      console.log(`Extensions: ${opts.ext ?? "none"}`);
+      console.log(`Files: ${opts.file}`);
+      console.log(`Content: ${opts.content}`);
+    }
+
+    const exts = opts.ext ? opts.ext.map((s) => s.replace(".", "")) : opts.ext;
+
     for (const file of opts.file) {
-      if (opts.ext) {
-        const ext = path.extname(file);
-        if (!opts.ext.includes(ext)) continue;
+      if (exts) {
+        const ext = path.extname(file).replace(".", "");
+
+        console.log(ext);
+        if (!exts.includes(ext)) continue;
       }
 
-      if (opts.verbose) console.log(`Prepending ${opts.content} to ${file}`);
+      if (opts.verbose) {
+        console.log(`Prepending to ${file}`);
+      }
 
       const cwd = process.cwd();
 
