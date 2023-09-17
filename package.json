@@ -1,0 +1,25 @@
+{
+  "name": "@rencedm112/prepend",
+  "version": "0.0.1",
+  "private": false,
+  "bin": {
+    "prepend": "./dist/index.js"
+  },
+  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "bun bundle.ts",
+    "publish": "npm publish",
+    "build-publish": "bun run build && bun run publish"
+  },
+  "devDependencies": {
+    "@commander-js/extra-typings": "^11.0.0",
+    "commander": "^11.0.0",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}
