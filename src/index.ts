@@ -10,18 +10,18 @@ function unescape(str: string) {
 }
 
 command
-  .argument("<prepend>", "The content to prepend")
-  .argument("<files...>", "Files to prepend to")
+  .requiredOption("-c, --content <string>", "The content to prepend")
+  .requiredOption("-f, --file <files...>", "Files to prepend to")
   .option("-v, --verbose", "Verbose output")
   .option("-e, --ext <extensions...>", "Only prepend to these file extensions")
-  .action(async (prepend, files, opts) => {
-    for (const file of files) {
+  .action(async (opts) => {
+    for (const file of opts.file) {
       if (opts.ext) {
         const ext = path.extname(file);
         if (!opts.ext.includes(ext)) continue;
       }
 
-      if (opts.verbose) console.log(`Prepending ${prepend} to ${file}`);
+      if (opts.verbose) console.log(`Prepending ${opts.content} to ${file}`);
 
       const cwd = process.cwd();
 
@@ -30,7 +30,7 @@ command
       const content = await fs.readFile(filePath);
       const string = content.toString("utf8");
 
-      const newContent = unescape(prepend) + string;
+      const newContent = unescape(opts.content) + string;
 
       await fs.writeFile(filePath, newContent);
     }

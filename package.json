@@ -1,7 +1,10 @@
 {
   "name": "@rencedm112/prepend",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "prepend": "./dist/index.js"
   },
@@ -9,9 +12,7 @@
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "bun bundle.ts",
-    "publish": "npm publish",
-    "build-publish": "bun run build && bun run publish"
+    "build": "bun bundle.ts"
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^11.0.0",
